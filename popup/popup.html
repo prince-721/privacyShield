@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BlurShield</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="bs-popup">
+    <header class="bs-header">
+      <div class="bs-wordmark" id="wordmark" aria-label="BlurShield">
+        <span class="bs-word-blur">Blur</span><span class="bs-word-shield">Shield</span>
+      </div>
+      <label class="bs-master-toggle">
+        <input type="checkbox" id="masterToggle" />
+        <span class="bs-toggle-track"><span class="bs-toggle-thumb"></span></span>
+      </label>
+    </header>
+
+    <section class="bs-status-card">
+      <div class="bs-status-row">
+        <span class="bs-eyebrow">Current site</span>
+        <span class="bs-site" id="siteHost">—</span>
+      </div>
+      <div class="bs-status-row">
+        <span class="bs-eyebrow">Protection</span>
+        <span class="bs-pill" id="protectionState">Active</span>
+      </div>
+    </section>
+
+    <section class="bs-block">
+      <span class="bs-eyebrow">Reveal mode</span>
+      <div class="bs-mode-grid" id="modeGrid">
+        <button class="bs-mode-btn" data-mode="hover">Hover</button>
+        <button class="bs-mode-btn" data-mode="click">Click</button>
+        <button class="bs-mode-btn" data-mode="alt">Hold Alt</button>
+        <button class="bs-mode-btn" data-mode="space">Hold Space</button>
+        <button class="bs-mode-btn" data-mode="timed">Timed</button>
+      </div>
+    </section>
+
+    <section class="bs-block">
+      <span class="bs-eyebrow">Blur intensity</span>
+      <div class="bs-level-grid" id="levelGrid">
+        <button class="bs-level-swatch" data-level="light"><span class="bs-swatch-preview bs-preview-light">Aa</span><span>Light</span></button>
+        <button class="bs-level-swatch" data-level="medium"><span class="bs-swatch-preview bs-preview-medium">Aa</span><span>Medium</span></button>
+        <button class="bs-level-swatch" data-level="strong"><span class="bs-swatch-preview bs-preview-strong">Aa</span><span>Strong</span></button>
+        <button class="bs-level-swatch" data-level="extreme"><span class="bs-swatch-preview bs-preview-extreme">Aa</span><span>Extreme</span></button>
+        <button class="bs-level-swatch" data-level="pixelated"><span class="bs-swatch-preview bs-preview-pixelated">Aa</span><span>Pixelated</span></button>
+        <button class="bs-level-swatch" data-level="blackbox"><span class="bs-swatch-preview bs-preview-blackbox">Aa</span><span>Black Box</span></button>
+      </div>
+    </section>
+
+    <section class="bs-stats-row">
+      <div class="bs-stat">
+        <span class="bs-stat-num" id="statBlurred">0</span>
+        <span class="bs-stat-label">blurred today</span>
+      </div>
+      <div class="bs-stat">
+        <span class="bs-stat-num" id="statReveals">0</span>
+        <span class="bs-stat-label">reveals</span>
+      </div>
+    </section>
+
+    <footer class="bs-footer">
+      <button class="bs-panic-btn" id="panicBtn" title="Ctrl+Shift+H">
+        <span class="bs-panic-dot"></span> Panic blur
+      </button>
+      <button class="bs-settings-btn" id="settingsBtn" aria-label="Open settings">⚙</button>
+    </footer>
+  </div>
+
+  <script src="../storage/schema.js"></script>
+  <script src="../utils/dom-utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* BlurShield — injected content styles.
+   Uses CSS variables so JS never has to touch inline animation logic. */
+
+:root {
+  --bs-duration: 200ms;
+  --bs-radius: 5px;
+}
+
+[data-blurshield] {
+  transition: filter var(--bs-duration) ease, opacity var(--bs-duration) ease;
+  filter: blur(var(--bs-radius));
+  will-change: filter;
+}
+
+[data-blurshield].bs-revealed {
+  filter: blur(0px);
+}
+
+/* Pixelated mode approximates a mosaic using a heavier blur + contrast trick;
+   true pixelation would need canvas rewriting, which we avoid for perf/CSP. */
+[data-blurshield].bs-blur-pixelated {
+  filter: blur(6px) contrast(1.15) saturate(1.3);
+  image-rendering: pixelated;
+}
+[data-blurshield].bs-blur-pixelated.bs-revealed {
+  filter: blur(0px) contrast(1) saturate(1);
+}
+
+/* Black Box mode: fully occlude rather than blur (max privacy). */
+[data-blurshield].bs-blur-blackbox {
+  filter: none;
+  color: transparent !important;
+  background: #0a0a0a !important;
+  border-radius: 4px;
+}
+[data-blurshield].bs-blur-blackbox * {
+  visibility: hidden;
+}
+[data-blurshield].bs-blur-blackbox.bs-revealed {
+  background: transparent !important;
+  color: inherit !important;
+}
+[data-blurshield].bs-blur-blackbox.bs-revealed * {
+  visibility: visible;
+}
+
+/* Code Mode: each line reveals independently, slightly tighter radius so
+   surrounding syntax highlighting colors don't create a distracting halo. */
+[data-blurshield="code"] {
+  filter: blur(calc(var(--bs-radius) * 0.8));
+}
+
+/* Document Mode: paragraph-level, slightly longer duration for a calmer feel. */
+[data-blurshield="document"] {
+  transition-duration: calc(var(--bs-duration) * 1.2);
+}
+
+/* Panic Button: blur absolutely everything under <html>, regardless of
+   per-element tracking state — a hard override, not a per-element toggle. */
+html.bs-panic body {
+  filter: blur(18px) !important;
+  transition: filter 120ms ease !important;
+  pointer-events: none !important;
+}
+
+/* Respect reduced-motion: no transition, blur/unblur snaps instantly. */
+@media (prefers-reduced-motion: reduce) {
+  [data-blurshield] {
+    transition: none !important;
+  }
+}
+
+/* Never let tracked elements trap focus visibly broken — keep focus rings. */
+[data-blurshield]:focus-within {
+  outline: 2px solid transparent; /* placeholder to avoid layout shift; browsers still show native focus */
+}

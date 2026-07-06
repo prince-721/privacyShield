@@ -1,0 +1,148 @@
+/* BlurShield Options Page styles — dynamic themes and accents */
+
+:root {
+  --radius-md: 14px;
+  --radius-sm: 8px;
+  --danger-color: #ff6a4d;
+  --danger-color-dim: rgba(255, 106, 77, 0.12);
+
+  /* Fallback defaults (dark theme) */
+  --ink: #0a0e1a;
+  --text-primary: #e8ecf4;
+  --text-muted: #8992a8;
+  --glass-fill: rgba(148, 163, 184, 0.07);
+  --glass-fill-hover: rgba(148, 163, 184, 0.12);
+  --glass-border: rgba(148, 163, 184, 0.16);
+  --bg-gradient-1: rgba(125, 211, 232, 0.08);
+  --bg-gradient-2: rgba(255, 106, 77, 0.06);
+
+  /* Default accent values (violet) */
+  --accent-color: #a78bfa;
+  --accent-color-dim: rgba(167, 139, 250, 0.16);
+}
+
+/* Themes mapping */
+.bs-theme-dark {
+  --ink: #0a0e1a;
+  --text-primary: #e8ecf4;
+  --text-muted: #8992a8;
+  --glass-fill: rgba(148, 163, 184, 0.07);
+  --glass-fill-hover: rgba(148, 163, 184, 0.12);
+  --glass-border: rgba(148, 163, 184, 0.16);
+  --bg-gradient-1: rgba(125, 211, 232, 0.08);
+  --bg-gradient-2: rgba(255, 106, 77, 0.06);
+}
+
+.bs-theme-light {
+  --ink: #f8fafc;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --glass-fill: rgba(71, 85, 105, 0.04);
+  --glass-fill-hover: rgba(71, 85, 105, 0.08);
+  --glass-border: rgba(71, 85, 105, 0.12);
+  --bg-gradient-1: rgba(125, 211, 232, 0.10);
+  --bg-gradient-2: rgba(255, 106, 77, 0.04);
+}
+
+/* Accents mapping */
+.bs-accent-ember {
+  --accent-color: #ff6a4d;
+  --accent-color-dim: rgba(255, 106, 77, 0.16);
+}
+.bs-accent-mist {
+  --accent-color: #7dd3e8;
+  --accent-color-dim: rgba(125, 211, 232, 0.16);
+}
+.bs-accent-violet {
+  --accent-color: #a78bfa;
+  --accent-color-dim: rgba(167, 139, 250, 0.16);
+}
+.bs-accent-lime {
+  --accent-color: #a3e635;
+  --accent-color-dim: rgba(163, 230, 53, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(120% 60% at 20% -10%, var(--bg-gradient-1), transparent 55%),
+    radial-gradient(120% 60% at 100% 0%, var(--bg-gradient-2), transparent 50%),
+    var(--ink);
+  color: var(--text-primary);
+  font-family: -apple-system, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.bs-opts { max-width: 880px; margin: 0 auto; padding: 40px 24px 80px; }
+
+.bs-opts-header { margin-bottom: 28px; }
+.bs-opts-wordmark { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+.bs-word-blur { color: var(--accent-color); }
+.bs-word-shield { color: var(--text-primary); }
+.bs-opts-tagline { color: var(--text-muted); font-size: 13.5px; margin-top: 6px; }
+
+.bs-opts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 720px) { .bs-opts-grid { grid-template-columns: 1fr; } }
+
+.bs-card {
+  background: var(--glass-fill); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md); padding: 20px; backdrop-filter: blur(14px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.bs-card h2 { font-size: 14px; margin: 0 0 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 700; }
+.bs-hint { font-size: 11.5px; color: var(--text-muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+.bs-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 13px; }
+.bs-row label { flex: 1; }
+.bs-row input[type="range"] { width: 120px; accent-color: var(--accent-color); }
+.bs-value { width: 44px; text-align: right; font-family: ui-monospace, monospace; color: var(--accent-color); font-size: 12px; }
+.bs-row-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent-color); }
+
+.bs-segmented { display: flex; background: rgba(0,0,0,0.15); border-radius: 999px; padding: 3px; }
+.bs-segmented button {
+  border: none; background: transparent; color: var(--text-muted); padding: 5px 14px;
+  border-radius: 999px; font-size: 12px; cursor: pointer; transition: color 150ms ease, background-color 150ms ease;
+}
+.bs-segmented button.bs-active { background: var(--glass-fill-hover); color: var(--text-primary); }
+
+.bs-swatches { display: flex; gap: 8px; }
+.bs-swatches button {
+  width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent;
+  background: var(--sw); cursor: pointer; transition: border-color 150ms ease;
+}
+.bs-swatches button.bs-active { border-color: var(--text-primary); }
+
+.bs-list-input { display: flex; gap: 8px; margin-bottom: 10px; }
+.bs-list-input input {
+  flex: 1; background: rgba(0,0,0,0.15); border: 1px solid var(--glass-border); border-radius: var(--radius-sm);
+  padding: 8px 10px; color: var(--text-primary); font-size: 13px; outline: none;
+}
+.bs-list-input input:focus { border-color: var(--accent-color); }
+.bs-list-input button, .bs-io-row button, .bs-danger {
+  background: var(--glass-fill-hover); border: 1px solid var(--glass-border); color: var(--text-primary);
+  border-radius: var(--radius-sm); padding: 8px 14px; font-size: 12.5px; cursor: pointer; font-weight: 600;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+.bs-list-input button:hover, .bs-io-row button:hover { background-color: var(--glass-fill); }
+
+.bs-danger { border-color: var(--danger-color); color: var(--danger-color); margin-top: 12px; background: var(--danger-color-dim); }
+.bs-danger:hover { background: rgba(255, 106, 77, 0.2); }
+
+.bs-tag-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.bs-tag-list li {
+  display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.15);
+  border: 1px solid var(--glass-border); border-radius: 999px; padding: 4px 6px 4px 10px; font-size: 12px;
+}
+.bs-tag-list button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 13px; line-height: 1; }
+.bs-tag-list button:hover { color: var(--danger-color); }
+
+.bs-shortcut-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 10px; }
+kbd {
+  background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 6px;
+  padding: 3px 7px; font-family: ui-monospace, monospace; font-size: 11.5px;
+}
+
+.bs-io-row { display: flex; gap: 8px; margin-bottom: 4px; }

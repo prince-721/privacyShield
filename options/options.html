@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BlurShield Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="bs-opts">
+    <header class="bs-opts-header">
+      <div class="bs-opts-wordmark"><span class="bs-word-blur">Blur</span><span class="bs-word-shield">Shield</span></div>
+      <p class="bs-opts-tagline">Everything below runs locally. No servers, no accounts, no telemetry.</p>
+    </header>
+
+    <div class="bs-opts-grid">
+      <section class="bs-card">
+        <h2>Appearance</h2>
+        <div class="bs-row">
+          <label>Theme</label>
+          <div class="bs-segmented" id="themeSeg">
+            <button data-value="dark">Dark</button>
+            <button data-value="light">Light</button>
+          </div>
+        </div>
+        <div class="bs-row">
+          <label>Accent</label>
+          <div class="bs-swatches" id="accentSwatches">
+            <button data-value="ember" style="--sw:#ff6a4d"></button>
+            <button data-value="mist" style="--sw:#7dd3e8"></button>
+            <button data-value="violet" style="--sw:#a78bfa"></button>
+            <button data-value="lime" style="--sw:#a3e635"></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bs-card">
+        <h2>Blur behavior</h2>
+        <div class="bs-row">
+          <label for="animSpeed">Animation speed</label>
+          <input type="range" id="animSpeed" min="100" max="400" step="10" />
+          <span class="bs-value" id="animSpeedVal">200ms</span>
+        </div>
+        <div class="bs-row">
+          <label for="hoverDelay">Hover delay before reveal</label>
+          <input type="range" id="hoverDelay" min="0" max="800" step="50" />
+          <span class="bs-value" id="hoverDelayVal">0ms</span>
+        </div>
+        <div class="bs-row">
+          <label for="timedSeconds">Temporary reveal duration</label>
+          <input type="range" id="timedSeconds" min="1" max="15" step="1" />
+          <span class="bs-value" id="timedSecondsVal">4s</span>
+        </div>
+        <div class="bs-row bs-row-check">
+          <label for="alwaysImages">Always blur images</label>
+          <input type="checkbox" id="alwaysImages" />
+        </div>
+        <div class="bs-row bs-row-check">
+          <label for="alwaysCode">Always blur code blocks</label>
+          <input type="checkbox" id="alwaysCode" />
+        </div>
+        <div class="bs-row bs-row-check">
+          <label for="reducedMotion">Respect reduced motion setting</label>
+          <input type="checkbox" id="reducedMotion" />
+        </div>
+        <div class="bs-row bs-row-check">
+          <label for="screenshotProtection">Screenshot protection (best-effort)</label>
+          <input type="checkbox" id="screenshotProtection" />
+        </div>
+      </section>
+
+      <section class="bs-card">
+        <h2>Whitelist <span class="bs-hint">— never blur these sites</span></h2>
+        <div class="bs-list-input">
+          <input type="text" id="whitelistInput" placeholder="e.g. google.com" />
+          <button id="whitelistAdd">Add</button>
+        </div>
+        <ul class="bs-tag-list" id="whitelistList"></ul>
+      </section>
+
+      <section class="bs-card">
+        <h2>Blacklist <span class="bs-hint">— always force-blur these sites</span></h2>
+        <div class="bs-list-input">
+          <input type="text" id="blacklistInput" placeholder="e.g. mybank.com" />
+          <button id="blacklistAdd">Add</button>
+        </div>
+        <ul class="bs-tag-list" id="blacklistList"></ul>
+      </section>
+
+      <section class="bs-card">
+        <h2>Keyboard shortcuts</h2>
+        <div class="bs-shortcut-row"><span>Panic button (blur everything)</span><kbd>Ctrl+Shift+H</kbd></div>
+        <div class="bs-shortcut-row"><span>Cycle blur intensity</span><kbd>Ctrl+Shift+B</kbd></div>
+        <p class="bs-hint">Shortcuts can be reassigned at <code>chrome://extensions/shortcuts</code>.</p>
+      </section>
+
+      <section class="bs-card">
+        <h2>Import / Export</h2>
+        <p class="bs-hint">Back up or transfer your settings, lists, and stats as a JSON file.</p>
+        <div class="bs-io-row">
+          <button id="exportBtn">Export settings</button>
+          <button id="importBtn">Import settings</button>
+          <input type="file" id="importFile" accept="application/json" hidden />
+        </div>
+        <button id="resetBtn" class="bs-danger">Reset to defaults</button>
+      </section>
+    </div>
+  </div>
+
+  <script src="../storage/schema.js"></script>
+  <script src="../utils/dom-utils.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
