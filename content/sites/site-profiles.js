@@ -24,16 +24,44 @@
     'web.whatsapp.com': {
       mode: 'default',
       include: [
+        // --- Conversation message bubbles ---
         '[data-testid="msg-container"]',
+        'div.message-in .copyable-text',
+        'div.message-out .copyable-text',
+        'div.message-in .selectable-text',
+        'div.message-out .selectable-text',
+        '[data-pre-plain-text]',           // message text wrapper (carries timestamp metadata)
+
+        // --- Chat list: last-message preview snippet under each contact name ---
+        '[data-testid="last-msg-status"]',
+        'span[dir="ltr"][class*="_"]',      // preview text spans in sidebar list items
+        'div[data-testid="cell-frame-secondary"]', // secondary line = preview text row
+
+        // --- Media, voice notes, attachments ---
         '[data-testid="media-viewer-image"]',
-        '[data-testid="ptt-audio"]', // voice notes
+        '[data-testid="ptt-audio"]',
         'img[src*="blob:"]',
+
+        // --- Quoted / forwarded / link previews inside bubbles ---
+        '[data-testid="quoted-message"]',
+        '[data-testid="link-preview"]',
+        'span[data-testid="forwarded-label"]',
       ],
       exclude: [
         '[data-testid="chat-list-search"]',
         'header',
-        '[data-testid="side"]',
-        '[aria-label="Chat list"]',
+        '[role="navigation"]',
+        '[data-testid="chatlist-header"]',
+        '[data-testid="btn-context-menu"]',
+        'button',
+        '[role="button"]',
+        'input',
+        'textarea',
+        '[contenteditable="true"]',
+        '[data-testid="compose-btn"]',
+        '[data-testid="send"]',
+        '[data-testid="attach"]',
+        '[data-testid="menu-bar"]',
       ],
     },
     'discord.com': {

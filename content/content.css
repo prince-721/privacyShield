@@ -74,3 +74,46 @@ html.bs-panic body {
 [data-blurshield]:focus-within {
   outline: 2px solid transparent; /* placeholder to avoid layout shift; browsers still show native focus */
 }
+
+/* ========================================================================
+   WhatsApp Web — site-specific overrides
+   ======================================================================== */
+
+/* Chat-list preview snippets (the "last message" line under each contact) */
+div[data-testid="cell-frame-secondary"][data-blurshield] {
+  filter: blur(var(--bs-radius));
+  transition: filter var(--bs-duration) ease;
+}
+div[data-testid="cell-frame-secondary"][data-blurshield].bs-revealed {
+  filter: blur(0px);
+}
+
+/* Message text inside conversation bubbles — both incoming and outgoing */
+div.message-in [data-blurshield],
+div.message-out [data-blurshield] {
+  filter: blur(var(--bs-radius));
+  transition: filter var(--bs-duration) ease;
+}
+div.message-in [data-blurshield].bs-revealed,
+div.message-out [data-blurshield].bs-revealed {
+  filter: blur(0px);
+}
+
+/* Quoted / forwarded / link-preview blocks inside bubbles */
+[data-testid="quoted-message"][data-blurshield],
+[data-testid="link-preview"][data-blurshield] {
+  filter: blur(var(--bs-radius));
+}
+[data-testid="quoted-message"][data-blurshield].bs-revealed,
+[data-testid="link-preview"][data-blurshield].bs-revealed {
+  filter: blur(0px);
+}
+
+/* Keep compose area, send button, navigation, and contact names always visible */
+[contenteditable="true"],
+[data-testid="compose-btn"],
+[data-testid="send"],
+[data-testid="conversation-header"],
+[data-testid="chatlist-header"] {
+  filter: none !important;
+}

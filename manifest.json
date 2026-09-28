@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "BlurShield — Privacy Blur for Chats, Docs & Code",
+  "name": "BlurShield — Blur Chats, Docs & Code",
   "version": "1.0.0",
   "description": "Automatically blurs sensitive on-screen content (chats, AI prompts, code, documents, images) and reveals it only on hover, click, or a key you choose. Everything runs locally — no servers, no data collection.",
   "icons": {
@@ -20,7 +20,19 @@
   },
   "background": {
     "service_worker": "background/service-worker.js",
+    "scripts": ["background/service-worker.js"],
     "type": "module"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "blurshield@privacy.extension",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "is_exempt": true,
+        "required": ["none"],
+        "reason": "This extension does not collect any user data. All processing is performed locally on the device."
+      }
+    }
   },
   "options_page": "options/options.html",
   "permissions": ["storage", "activeTab", "scripting", "contextMenus"],
